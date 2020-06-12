@@ -9,7 +9,7 @@ class Message extends Component {
                 {this.props.type === "sender" ?
                     <div className="row">
                         <div className="col text-right">
-                            <span><strong>{this.props.name}</strong></span>
+                            <span className="text-primary"><strong>{this.props.name}</strong></span>
                             <span className="text-black-50"> at {this.props.time}</span>
                             <p className="text-muted">{this.props.message}</p>
                         </div>

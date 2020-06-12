@@ -6,3 +6,8 @@
     height: 46px;
     box-shadow: none !important;
 }
+
+.append-icon{
+    color:gray;
+    stroke:gray;
+}

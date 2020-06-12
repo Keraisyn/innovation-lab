@@ -31,8 +31,11 @@ class ChatWindow extends Component {
     render() {
         return (
             <div className="h-100 chat-window">
+                {/* Header with username and picture */}
                 <ChatHeader/>
-                <div className="message-window border-bottom border-top py-4 px-2">
+
+                {/* Message window */}
+                <div className="message-window border-bottom border-top py-4 px-5">
                     {this.testMessages.map(msg => (
                         <Message
                             name={msg.name}
@@ -41,7 +44,14 @@ class ChatWindow extends Component {
                             type={msg.type}
                         />
                     ))}
+                    <div className="mx-3 px-5">
+                        <hr/>
+                    </div>
+                    <div className="px-4 my-4">
+                        <h1 className="h5 text-muted">Today</h1>
+                    </div>
                 </div>
+                {/* Message typing bar */}
                 <MessageEnter />
             </div>
         );

@@ -11,7 +11,7 @@ class ChatApp extends Component {
                      <div className="col chatbar p-0">
                          <ChatBar/>
                      </div>
-                     <div className="col p-0">
+                     <div className="col p-0 border-left">
                          <ChatWindow/>
                      </div>
                  </div>
