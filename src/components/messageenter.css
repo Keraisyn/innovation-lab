@@ -1,0 +1,8 @@
+/* Message input bar */
+.message-input {
+    overflow: hidden;
+    overflow-wrap: break-word;
+    resize: none;
+    height: 46px;
+    box-shadow: none !important;
+}

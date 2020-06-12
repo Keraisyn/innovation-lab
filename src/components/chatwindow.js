@@ -32,7 +32,7 @@ class ChatWindow extends Component {
         return (
             <div className="h-100 chat-window">
                 <ChatHeader/>
-                <div className="message-window border-bottom">
+                <div className="message-window border-bottom border-top py-4 px-2">
                     {this.testMessages.map(msg => (
                         <Message
                             name={msg.name}
