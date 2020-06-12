@@ -1,3 +1,16 @@
-.profile-row {
-    width: 30px;
+.profile-row-left {
+    max-width: 40px;
+    margin-left: 20px;
+    padding: 0;
+}
+
+.profile-row-right {
+    max-width: 40px;
+    margin-right: 20px;
+    padding: 0;
+}
+
+.profile-picture {
+    width: 40px;
+    height: 40px;
 }

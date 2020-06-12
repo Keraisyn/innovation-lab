@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import Message from "./message";
+import "./chatwindow.css";
+import MessageEnter from "./messageenter";
+import ChatHeader from "./chatheader";
 
 class ChatWindow extends Component {
     constructor(props) {
@@ -13,29 +16,33 @@ class ChatWindow extends Component {
         {
             name: "Matthews Ma",
             time: "8:50",
-            message: "Hello world!"
+            message: "Hello world!",
+            type: "other",
         },
         {
             name: "Test",
             time: "8:53",
-            message: "Hi!"
+            message: "Hi!",
+            type: "sender",
         },
     ];
 
 
     render() {
         return (
-            <div className="h-100">
-                <div className="my-5 py-5">
-
+            <div className="h-100 chat-window">
+                <ChatHeader/>
+                <div className="message-window border-bottom">
+                    {this.testMessages.map(msg => (
+                        <Message
+                            name={msg.name}
+                            time={msg.time}
+                            message={msg.message}
+                            type={msg.type}
+                        />
+                    ))}
                 </div>
-                {this.testMessages.map(msg => (
-                    <Message
-                        name={msg.name}
-                        time={msg.time}
-                        message={msg.message}
-                    />
-                ))}
+                <MessageEnter />
             </div>
         );
     }

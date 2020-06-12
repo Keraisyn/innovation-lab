@@ -10,7 +10,7 @@ import ChatApp from "./components/chatapp";
 function App() {
     const firebaseConfig = {
 
-    }
+    };
 
     const loggedIn = true;
     const showChat = false;

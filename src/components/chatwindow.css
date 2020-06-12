@@ -1,0 +1,16 @@
+/* Entire right chat window */
+.chat-window {
+    display: flex;
+    flex-flow: column;
+}
+
+/* Window with just messages */
+.message-window {
+    flex:2;
+}
+
+/* Message input bar */
+.message-bar {
+
+}
+
