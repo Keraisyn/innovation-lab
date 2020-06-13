@@ -9,9 +9,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  //  Remove StrictMode to avoid calling constructor twice (firebase error)
+  // <React.StrictMode>
+  //   <App />
+  // </React.StrictMode>,
+    <App/>,
   document.getElementById('root')
 );
 
