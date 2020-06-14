@@ -8,9 +8,8 @@ import * as firebaseui from "firebaseui";
 
 import logo from './logo.svg';
 import './App.css';
-import Login from "./components/login";
-import Navbar from "./components/navbar";
-import ChatApp from "./components/chatapp";
+import ChatApp from "./components/chat/chatapp";
+import About from "./components/about/about";
 
 class App extends Component {
     constructor(props) {
@@ -44,6 +43,7 @@ class App extends Component {
                 this.setState({
                     loggedIn: true,
                     showChat: true,
+                    uid: uid,
                 });
                 console.log("User signed in");
                 // ...
@@ -77,7 +77,7 @@ class App extends Component {
         return (
             <div className="App">
                 <Switch>
-                    <Route path="/" render={(props) => <Navbar logOut={this.logOut()} />} exact />
+                    <Route path="/" render={(props) => <About uid={this.state.uid}/>} exact />
                     <Route path="/app" component={ChatApp} />
                 </Switch>
             </div>
