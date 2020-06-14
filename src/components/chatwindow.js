@@ -3,26 +3,60 @@ import Message from "./message";
 import "./chatwindow.css";
 import MessageEnter from "./messageenter";
 import ChatHeader from "./chatheader";
+import axios from "axios";
 
 class ChatWindow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            message: null,
-        }
+            messages: [],
+        };
+        this.getChatHistory()
     }
 
+    getChatHistory() {
+        axios.post("https://mental-health-server--rshetty.repl.co/getChatHistory", {
+            user1: 'matthews',
+            user2: 'rohan',
+        }).then(res => {
+            console.log(res);
+            console.log(res.data);
+            this.setState({
+                messages: res.data,
+            });
+        });
+    }
+
+    // Temp UI testing messages
     testMessages = [
         {
             name: "Matthews Ma",
             time: "8:50",
-            message: "Hello world!",
+            message: "Hello world! iuh iou hi uhaio euh aoeiuh faoi ahoifuh usaui efiaughyugf ief ygeuky",
             type: "other",
         },
         {
             name: "Test",
             time: "8:53",
-            message: "Hi!",
+            message: "Hi! waiyf akufya ekuy gkuay geakuygeaiuky kube fkawuf oi uhiluhv oiasefh aseiluf ahgelrfuhoiu ",
+            type: "sender",
+        },
+        {
+            name: "Matthews Ma",
+            time: "8:50",
+            message: "Hello world! ewaliouh eliuhd iuflj eilu nd oiu dilk eu ",
+            type: "other",
+        },
+        {
+            name: "Matthews Ma",
+            time: "8:50",
+            message: "Hello world! joeij afefoi f ojdoaifu n oiduh ifuh aishirbaiudshy kiasufb duyfb ufy ",
+            type: "other",
+        },
+        {
+            name: "You",
+            time: "8:50",
+            message: "dont kill urwself dont kill urwselfdont kill urwselfdont kill urwselfdont kill urwselfdont kill urwselfdont kill urwself",
             type: "sender",
         },
     ];

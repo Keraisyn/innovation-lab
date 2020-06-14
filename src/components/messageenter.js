@@ -1,15 +1,43 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import "./messageenter.css";
 
 class MessageEnter extends Component {
+    sendMessage(e) {
+        if (e.key === 'Enter') {
+            // Clear text value
+            e.target.value = "";
+
+            console.log("Message processing");
+
+            // POST message to server
+            axios.post("https://mental-health-server--rshetty.repl.co/newChatMessage", {
+                sender: 'matthews',
+                receiver: 'rohan',
+                message: 'lorem ipsum',
+            }).then(res => {
+                console.log(res);
+                console.log(res.data);
+            });
+
+            // axios.post("https://mental-health-server--rshetty.repl.co/getChatHistory", {
+            //     user1: 'matthews',
+            //     user2: 'rohan',
+            // }).then(res => {
+            //     console.log(res);
+            //     console.log(res.data);
+            // });
+        }
+    }
+
     render() {
         return (
             <div className="message-bar py-4 px-5">
                 <div className="form-row align-items-center">
                     <div className="col">
                         <div className="input-group">
-                        <textarea className="message-input form-control bg-transparent border-0" placeholder="message"
-                                  rows={1} data-autosize={true}>
+                        <textarea className="message-input form-control bg-transparent border-0" placeholder="Type your message..."
+                                  rows={1} data-autosize={true} onKeyUp={this.sendMessage}>
                         </textarea>
                             <div className="input-group-append">
                                 <button className="btn btn-ico btn-secondary btn-minimal bg-transparent border-0 append-icon"

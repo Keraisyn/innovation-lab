@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 import * as firebase from "firebase";
 import "firebase/auth";
@@ -17,7 +18,8 @@ class App extends Component {
             loggedIn: false,
             showChat: false,
         };
-        // Your web app's Firebase configuration
+
+        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCrnkoSLbcPCfn0K2H7ym_rwCqU2ztSoWU",
             authDomain: "chat-app-86e50.firebaseapp.com",
@@ -29,7 +31,7 @@ class App extends Component {
             measurementId: "G-R7Z40830FQ"
         };
 
-        console.log("running config")
+        console.log("Initializing Firebase app");
         firebase.initializeApp(firebaseConfig);
 
         firebase.auth().onAuthStateChanged((user) => {
@@ -37,12 +39,12 @@ class App extends Component {
                 // User is signed in.
                 var isAnonymous = user.isAnonymous;
                 var uid = user.uid;
-                console.log(uid);
+                console.log("User ID:", uid);
                 this.setState({
                     loggedIn: true,
                     showChat: true,
-                })
-                console.log("lmaoooo");
+                });
+                console.log("User signed in");
                 // ...
             } else {
                 // User is signed out.
@@ -53,6 +55,7 @@ class App extends Component {
     }
 
     anonymousAuth() {
+        console.log("User authenticated");
         firebase.auth().signInAnonymously().catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
@@ -61,11 +64,19 @@ class App extends Component {
         });
     }
 
+    logOut() {
+        firebase.auth().signOut().then(function() {
+            // Sign-out successful.
+        }, function(error) {
+            // An error happened.
+        });
+    }
+
     render() {
         return (
             <div className="App">
-                {this.state.loggedIn ? "" : <button className="btn btn-primary mt-5 pt-5" onClick={this.anonymousAuth()}>hiof</button>}
-                <Navbar/>
+                {this.state.loggedIn ? "" : <button className="btn btn-primary mt-5 pt-5" onClick={this.anonymousAuth()}>Authenticate</button>}
+                <Navbar logOut={this.logOut()}/>
                 {/*{this.state.loggedIn ? "" : <Login/>}*/}
                 {this.state.showChat ? <ChatApp/> : ""}
             </div>
