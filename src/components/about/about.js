@@ -1,4 +1,4 @@
-// About component
+// Component: About
 // - Main marketing page
 // - Includes form which connects to volunteer
 

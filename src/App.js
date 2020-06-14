@@ -4,6 +4,7 @@ import {Switch, Route} from "react-router-dom";
 
 import * as firebase from "firebase";
 import "firebase/auth";
+import "firebase/firestore";
 import * as firebaseui from "firebaseui";
 
 import logo from './logo.svg';
@@ -33,6 +34,14 @@ class App extends Component {
 
         console.log("Initializing Firebase app");
         firebase.initializeApp(firebaseConfig);
+
+        const db = firebase.firestore();
+
+        db.collection("chats").doc("matthews++rohan")
+            .onSnapshot(function(doc) {
+                const source = doc.metadata.hasPendingWrites ? "Local" : "Server";
+                console.log(source, " data: ", doc.data());
+            });
 
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
@@ -78,7 +87,7 @@ class App extends Component {
             <div className="App">
                 <Switch>
                     <Route path="/" render={(props) => <About uid={this.state.uid}/>} exact />
-                    <Route path="/app" component={ChatApp} />
+                    <Route path="/app" render={(props) => <ChatApp uid={this.state.uid} firebase={firebase} />} />
                 </Switch>
             </div>
 

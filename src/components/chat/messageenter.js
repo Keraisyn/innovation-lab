@@ -3,10 +3,16 @@ import axios from 'axios';
 import "./messageenter.css";
 
 class MessageEnter extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            messageValue: "",
+        }
+    }
+
+    // Send message to server when user presses enter
     sendMessage(e) {
         if (e.key === 'Enter') {
-            // Clear text value
-            e.target.value = "";
 
             console.log("Message processing");
 
@@ -14,19 +20,14 @@ class MessageEnter extends Component {
             axios.post("https://mental-health-server--rshetty.repl.co/newChatMessage", {
                 sender: 'matthews',
                 receiver: 'rohan',
-                message: 'lorem ipsum',
+                message: e.target.value,
             }).then(res => {
                 console.log(res);
                 console.log(res.data);
             });
 
-            // axios.post("https://mental-health-server--rshetty.repl.co/getChatHistory", {
-            //     user1: 'matthews',
-            //     user2: 'rohan',
-            // }).then(res => {
-            //     console.log(res);
-            //     console.log(res.data);
-            // });
+            // Clear text value
+            e.target.value = "";
         }
     }
 

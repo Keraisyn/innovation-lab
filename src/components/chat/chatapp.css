@@ -1,7 +1,6 @@
 .chat-container {
     margin:0;
     padding:0;
-    padding-top: 60px;
 }
 
 @media (max-width: 979px) {

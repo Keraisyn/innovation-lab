@@ -7,10 +7,13 @@
 /* Window with just messages */
 .message-window {
     flex:2;
+    flex-basis: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height:0;
 }
 
 /* Message input bar */
 .message-bar {
-
 }
 

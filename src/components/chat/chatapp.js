@@ -12,7 +12,7 @@ class ChatApp extends Component {
                          <ChatBar/>
                      </div>
                      <div className="col p-0 border-left">
-                         <ChatWindow/>
+                         <ChatWindow uid={this.props.uid} firebase={this.props.firebase}/>
                      </div>
                  </div>
              </div>

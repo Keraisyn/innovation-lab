@@ -1,3 +1,6 @@
+// Component: ChatWindow
+// - Window on right side where user can view + send messages
+
 import React, {Component} from 'react';
 import Message from "./message";
 import "./chatwindow.css";
@@ -11,10 +14,24 @@ class ChatWindow extends Component {
         this.state = {
             messages: [],
         };
-        this.getChatHistory()
+        this.getChatHistory();
+        this.setupDatabase();
+    }
+
+    setupDatabase() {
+        const db = this.props.firebase.firestore();
+        db.collection("chats").doc("matthews++rohan")
+            .onSnapshot((doc) => {
+                const source = doc.metadata.hasPendingWrites ? "Local" : "Server";
+                console.log(doc.data().messages);
+                this.setState({
+                    messages: doc.data().messages,
+                });
+            });
     }
 
     getChatHistory() {
+        console.log("Getting chat history");
         axios.post("https://mental-health-server--rshetty.repl.co/getChatHistory", {
             user1: 'matthews',
             user2: 'rohan',
@@ -70,9 +87,9 @@ class ChatWindow extends Component {
 
                 {/* Message window */}
                 <div className="message-window border-bottom border-top py-4 px-5">
-                    {this.testMessages.map(msg => (
+                    {this.state.messages.map(msg => (
                         <Message
-                            name={msg.name}
+                            name={msg.sender}
                             time={msg.time}
                             message={msg.message}
                             type={msg.type}
