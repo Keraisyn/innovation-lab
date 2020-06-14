@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Switch, Route} from "react-router-dom";
 
 import * as firebase from "firebase";
 import "firebase/auth";
@@ -66,7 +67,7 @@ class App extends Component {
 
     logOut() {
         firebase.auth().signOut().then(function() {
-            // Sign-out successful.
+            console.log("Signout successful");
         }, function(error) {
             // An error happened.
         });
@@ -75,11 +76,18 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                {this.state.loggedIn ? "" : <button className="btn btn-primary mt-5 pt-5" onClick={this.anonymousAuth()}>Authenticate</button>}
-                <Navbar logOut={this.logOut()}/>
-                {/*{this.state.loggedIn ? "" : <Login/>}*/}
-                {this.state.showChat ? <ChatApp/> : ""}
+                <Switch>
+                    <Route path="/" render={(props) => <Navbar logOut={this.logOut()} />} exact />
+                    <Route path="/app" component={ChatApp} />
+                </Switch>
             </div>
+
+            // <div className="App">
+            //     {this.state.loggedIn ? "" : <button className="btn btn-primary mt-5 pt-5" onClick={this.anonymousAuth()}>Authenticate</button>}
+            //     <Navbar logOut={this.logOut()}/>
+            //     {/*{this.state.loggedIn ? "" : <Login/>}*/}
+            //     {this.state.showChat ? <ChatApp/> : ""}
+            // </div>
         );
     }
 }
