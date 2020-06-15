@@ -2,6 +2,7 @@
 // - Window on right side where user can view + send messages
 
 import React, {Component} from 'react';
+import moment from 'moment';
 import Message from "./message";
 import "./chatwindow.css";
 import MessageEnter from "./messageenter";
@@ -12,7 +13,7 @@ class ChatWindow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            messages: [],
+            messages: this.props.messages ? this.props.messages : [],
         };
         this.getChatHistory();
         this.setupDatabase();
@@ -20,7 +21,7 @@ class ChatWindow extends Component {
 
     setupDatabase() {
         const db = this.props.firebase.firestore();
-        db.collection("chats").doc("matthews++rohan")
+        db.collection("chats").doc(this.props.uid + "++matthews")
             .onSnapshot((doc) => {
                 const source = doc.metadata.hasPendingWrites ? "Local" : "Server";
                 console.log(doc.data().messages);
@@ -33,8 +34,8 @@ class ChatWindow extends Component {
     getChatHistory() {
         console.log("Getting chat history");
         axios.post("https://mental-health-server--rshetty.repl.co/getChatHistory", {
-            user1: 'matthews',
-            user2: 'rohan',
+            user1: this.props.uid,
+            user2: 'matthews',
         }).then(res => {
             console.log(res);
             console.log(res.data);
@@ -80,7 +81,13 @@ class ChatWindow extends Component {
 
 
     render() {
+        // if (this.state.messages === []) {
+        //     this.setState({
+        //         messages: this.props.messages,
+        //     });
+        // }
         return (
+
             <div className="h-100 chat-window">
                 {/* Header with username and picture */}
                 <ChatHeader/>
@@ -90,7 +97,7 @@ class ChatWindow extends Component {
                     {this.state.messages.map(msg => (
                         <Message
                             name={msg.sender}
-                            time={msg.time}
+                            time={moment(msg.timestamp.milliseconds).format("h:mm a")}
                             message={msg.message}
                             type={msg.type}
                         />
@@ -103,7 +110,7 @@ class ChatWindow extends Component {
                     </div>
                 </div>
                 {/* Message typing bar */}
-                <MessageEnter />
+                <MessageEnter uid={this.props.uid}/>
             </div>
         );
     }

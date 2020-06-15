@@ -11,15 +11,16 @@ class MessageEnter extends Component {
     }
 
     // Send message to server when user presses enter
-    sendMessage(e) {
+    sendMessage = (e) => {
         if (e.key === 'Enter') {
 
             console.log("Message processing");
+            const sender=this.props.uid;
 
             // POST message to server
             axios.post("https://mental-health-server--rshetty.repl.co/newChatMessage", {
-                sender: 'matthews',
-                receiver: 'rohan',
+                sender: this.props.uid,
+                receiver: 'matthews',
                 message: e.target.value,
             }).then(res => {
                 console.log(res);

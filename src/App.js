@@ -57,6 +57,7 @@ class App extends Component {
                 });
                 console.log("User auth state change detected");
                 // ...
+
             } else {
                 // User is signed out.
                 // ...
@@ -65,6 +66,18 @@ class App extends Component {
             // ...
         });
     }
+
+    // setupDatabase() {
+    //     const db = this.props.firebase.firestore();
+    //     db.collection("chats").doc(this.props.uid + "++matthews")
+    //         .onSnapshot((doc) => {
+    //             const source = doc.metadata.hasPendingWrites ? "Local" : "Server";
+    //             console.log(doc.data().messages);
+    //             this.setState({
+    //                 messages: doc.data().messages,
+    //             });
+    //         });
+    // }
 
     anonymousAuth() {
         console.log("User authenticated");
@@ -78,7 +91,7 @@ class App extends Component {
 
     // Logs user in through Firebase and POSTs to server. Called from about component
     handleLogin = () => {
-        console.log("User authenticated");
+        console.log("User authentication triggered");
         firebase.auth().signInAnonymously().catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
@@ -90,10 +103,29 @@ class App extends Component {
             email: null,
             type: "user",
         };
-        console.log(data);
+        // Send POST to register user in database
         axios.post("https://mental-health-server--rshetty.repl.co/registerUser", data).then(res => {
             console.log(res);
             console.log(res.data);
+
+            if (res.data!=="Username taken") {
+
+                // Find volunteer for user then confirm the chat with them
+                axios.post("https://mental-health-server--rshetty.repl.co/findVolunteer", {
+                    username: this.state.uid,
+                }).then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                    axios.post("https://mental-health-server--rshetty.repl.co/confirmChat", {
+                        user1: this.state.uid,
+                        user2: res.data,
+                    }).then(res => {
+                        console.log(res);
+                        console.log(res.data);
+                        // this.setupDatabase();
+                    });
+                });
+            }
         });
     };
 

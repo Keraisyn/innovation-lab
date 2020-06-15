@@ -41,12 +41,19 @@ class About extends Component {
             <div>
                 <Navbar logout={this.props.logout}/>
 
+                <div className="container text-center align-items-start mb-5">
+                    <section className="title">
+                        <h1 className="display-2">Innovation Lab</h1>
+                        <h1 className="lead text-muted">Talk to someone now, free and anonymously</h1>
+                    </section>
+                </div>
+
                 <form className="form-signin text-center" onSubmit={this.handleSubmit}>
-                    <h1 className="h2 font-weight-normal mb-4">Please Log In</h1>
-                    <input type="username" id="inputUsername" placeholder="Username" className="form-control mb-2"/>
-                    <input type="password" id="inputPassword" placeholder="Password" className="form-control mb-4"/>
-                    <button className="btn btn-lg btn-primary btn-block">Log In</button>
-                    <p className="mt-5 mb-3 text-muted">© 2020</p>
+                    <h1 className="h2 font-weight-normal mb-4">Want to talk? Click connect</h1>
+                    {/*<input type="username" id="inputUsername" placeholder="Username" className="form-control mb-2"/>*/}
+                    {/*<input type="password" id="inputPassword" placeholder="Password" className="form-control mb-4"/>*/}
+                    <button className="btn btn-lg btn-primary btn-block">Connect</button>
+                    {/*<p className="mt-5 mb-3 text-muted">© 2020</p>*/}
                 </form>
             </div>
         );
