@@ -76,6 +76,7 @@ class App extends Component {
         });
     }
 
+    // Logs user in through Firebase and POSTs to server. Called from about component
     handleLogin = () => {
         console.log("User authenticated");
         firebase.auth().signInAnonymously().catch(function (error) {

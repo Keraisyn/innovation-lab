@@ -5,6 +5,7 @@
 import React, {Component} from 'react';
 import Navbar from "../navbar";
 import axios from "axios";
+import {withRouter} from 'react-router-dom';
 
 class About extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class About extends Component {
     handleSubmit(event) {
         event.preventDefault();
         this.props.handleLogin();
+        this.props.history.push('/app');
         // alert('A name was submitted: ' + this.state.value);
         // event.preventDefault();
         // const data = {
@@ -51,4 +53,4 @@ class About extends Component {
     }
 }
 
-export default About;
+export default withRouter(About);
