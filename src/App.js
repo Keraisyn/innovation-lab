@@ -48,17 +48,19 @@ class App extends Component {
                 // User is signed in.
                 var isAnonymous = user.isAnonymous;
                 var uid = user.uid;
+                isAnonymous ? console.log("User is anonymous") : console.log("User is not");
                 console.log("User ID:", uid);
                 this.setState({
                     loggedIn: true,
                     showChat: true,
                     uid: uid,
                 });
-                console.log("User signed in");
+                console.log("User auth state change detected");
                 // ...
             } else {
                 // User is signed out.
                 // ...
+                console.log("User auth state signout detected");
             }
             // ...
         });
@@ -74,6 +76,26 @@ class App extends Component {
         });
     }
 
+    handleLogin = () => {
+        console.log("User authenticated");
+        firebase.auth().signInAnonymously().catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+        });
+        const data = {
+            username: this.state.uid,
+            email: null,
+            type: "user",
+        };
+        console.log(data);
+        axios.post("https://mental-health-server--rshetty.repl.co/registerUser", data).then(res => {
+            console.log(res);
+            console.log(res.data);
+        });
+    };
+
     logOut() {
         firebase.auth().signOut().then(function() {
             console.log("Signout successful");
@@ -86,7 +108,7 @@ class App extends Component {
         return (
             <div className="App">
                 <Switch>
-                    <Route path="/" render={(props) => <About uid={this.state.uid}/>} exact />
+                    <Route path="/" render={(props) => <About logout={this.logOut} uid={this.state.uid} handleLogin={this.handleLogin}/>} exact />
                     <Route path="/app" render={(props) => <ChatApp uid={this.state.uid} firebase={firebase} />} />
                 </Switch>
             </div>

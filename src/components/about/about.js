@@ -17,21 +17,27 @@ class About extends Component {
 
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
         event.preventDefault();
-        axios.post("https://mental-health-server--rshetty.repl.co/registerUser", {
-            username:this.props.uid,
-            type:"user",
-        }).then(res => {
-            console.log(res);
-            console.log(res.data);
-        });
+        this.props.handleLogin();
+        // alert('A name was submitted: ' + this.state.value);
+        // event.preventDefault();
+        // const data = {
+        //     username:this.props.uid,
+        //     email:null,
+        //     type:"user",
+        // };
+        // console.log(data);
+        // axios.post("https://mental-health-server--rshetty.repl.co/registerUser", data).then(res => {
+        //     console.log(res);
+        //     console.log(res.data);
+        // });
+
     }
 
     render() {
         return (
             <div>
-                <Navbar/>
+                <Navbar logout={this.props.logout}/>
 
                 <form className="form-signin text-center" onSubmit={this.handleSubmit}>
                     <h1 className="h2 font-weight-normal mb-4">Please Log In</h1>
