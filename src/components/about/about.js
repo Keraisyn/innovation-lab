@@ -42,7 +42,7 @@ class About extends Component {
             <div className="w-100">
                 <Navbar logout={this.props.logout}/>
 
-                <div className="hero bg-primary container-fluid d-flex pt-5">
+                <div className="hero container-fluid d-flex pt-5">
                     <div className="my-auto container text-white">
                         <h1 className="display-2">Innovation lab</h1>
                         <h1 className="lead mb-5">Talk to someone now, free and anonymously</h1>
@@ -80,8 +80,8 @@ class About extends Component {
                         </div>
                     </section>
                 </div>
-                <div className="container-fluid bg-primary footer pt-5 text-white-50">
-                    <section className="footer text-center bg-primary my-auto">
+                <div className="container-fluid footer pt-5 text-white-50">
+                    <section className="footer text-center my-auto">
                         <h5 className="mb-3">A demo for the Highlander Innovation Lab</h5>
                         <h6>Created by Matthews, Rohan, Aryan, and Sean</h6>
                     </section>
