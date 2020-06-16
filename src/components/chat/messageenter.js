@@ -19,8 +19,8 @@ class MessageEnter extends Component {
 
             // POST message to server
             axios.post("https://mental-health-server--rshetty.repl.co/newChatMessage", {
-                sender: this.props.uid,
-                receiver: 'matthews',
+                receiver: "7hvZpGNAb2Ox6GwGHApxdsuch5P2",
+                sender: 'matthews',
                 message: e.target.value,
             }).then(res => {
                 console.log(res);

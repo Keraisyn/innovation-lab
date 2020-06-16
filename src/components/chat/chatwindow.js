@@ -21,7 +21,8 @@ class ChatWindow extends Component {
 
     setupDatabase() {
         const db = this.props.firebase.firestore();
-        db.collection("chats").doc(this.props.uid + "++matthews")
+        // db.collection("chats").doc(this.props.uid + "++matthews")
+        db.collection("chats").doc("7hvZpGNAb2Ox6GwGHApxdsuch5P2" + "++matthews")
             .onSnapshot((doc) => {
                 const source = doc.metadata.hasPendingWrites ? "Local" : "Server";
                 console.log(doc.data().messages);
@@ -96,10 +97,10 @@ class ChatWindow extends Component {
                 <div className="message-window border-bottom border-top py-4 px-5">
                     {this.state.messages.map(msg => (
                         <Message
-                            name={msg.sender===this.props.uid ? "You" : msg.sender }
+                            name={msg.sender==="matthews" ? "You" : msg.sender }
                             time={moment(msg.timestamp.milliseconds).format("h:mm a")}
                             message={msg.message}
-                            type={msg.sender===this.props.uid ? "sender" : ""}
+                            type={msg.sender==="matthews" ? "sender" : ""}
                         />
                     ))}
                     {/*<div className="mx-3 px-5">*/}
