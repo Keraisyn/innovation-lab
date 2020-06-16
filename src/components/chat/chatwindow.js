@@ -96,10 +96,10 @@ class ChatWindow extends Component {
                 <div className="message-window border-bottom border-top py-4 px-5">
                     {this.state.messages.map(msg => (
                         <Message
-                            name={msg.sender}
+                            name={msg.sender===this.props.uid ? "You" : msg.sender }
                             time={moment(msg.timestamp.milliseconds).format("h:mm a")}
                             message={msg.message}
-                            type={msg.type}
+                            type={msg.sender===this.props.uid ? "sender" : ""}
                         />
                     ))}
                     <div className="mx-3 px-5">
