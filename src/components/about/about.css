@@ -1,0 +1,14 @@
+.App {
+    justify-content: normal;
+}
+
+.hero {
+    height:80vh;
+    /*background: linear-gradient(150.88deg, #D8FFE6 25.38%, #A8FFB6 80.51%);*/
+    background-color: #575A89;
+}
+
+.footer {
+    height:150px;
+    background-color: #575A89;
+}

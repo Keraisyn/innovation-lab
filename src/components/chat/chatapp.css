@@ -1,0 +1,14 @@
+.chat-container {
+    margin:0;
+    padding:0;
+}
+
+@media (max-width: 979px) {
+    .chat-container {
+        padding-top: 0;
+    }
+}
+
+.chatbar {
+    max-width: 325px;
+}
