@@ -102,12 +102,12 @@ class ChatWindow extends Component {
                             type={msg.sender===this.props.uid ? "sender" : ""}
                         />
                     ))}
-                    <div className="mx-3 px-5">
-                        <hr/>
-                    </div>
-                    <div className="px-4 my-4">
-                        <h1 className="h5 text-muted">Today</h1>
-                    </div>
+                    {/*<div className="mx-3 px-5">*/}
+                    {/*    <hr/>*/}
+                    {/*</div>*/}
+                    {/*<div className="px-4 my-4">*/}
+                    {/*    <h1 className="h5 text-muted">Today</h1>*/}
+                    {/*</div>*/}
                 </div>
                 {/* Message typing bar */}
                 <MessageEnter uid={this.props.uid}/>
